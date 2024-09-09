@@ -10,7 +10,7 @@ try {
             clients(); // Affichage de la liste des clients
         else if ($_GET["action"] == "articles")
             articles();
-        else if ($_GET["action"] == "commandes")
+        else if ($_GET["acion"] == "commandes")
             commandes();
         else
             throw new Exception("Action non valide");
