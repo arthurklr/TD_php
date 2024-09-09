@@ -34,7 +34,7 @@ function getArticles()
 function getCommandes()
 {
     $bdd = connexionBDD();
-    $reponse = $bdd->query("SELECT c.id_comm AS 'N° commande', cl.nom AS 'Nom', cl.prenom AS 'Prénom', DATE_FORMAT(c.date, '%d/%m/%Y') AS 'Date' FROM commande c INNER JOIN client cl ON c.id_client = cl.id_client ORDER BY cl.nom, cl.prenom ASC");
+    $reponse = $bdd->query("SELECT c.id_comm AS 'N° commande', cl.nom AS 'Nom', cl.prenom AS 'Prénom', DATE_FORMAT(c.date, '%d/%m/%Y') AS 'Date' FROM commande c INNER JOIN client cl ON c.id_client = cl.id_client ORDER BY cl.nom, cl.prenom");
     $commandes = $reponse->fetchAll(PDO::FETCH_ASSOC);
     return $commandes;
 }
