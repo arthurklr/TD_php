@@ -10,6 +10,7 @@ ob_start();
   if (count($commandes)) {
     // Affichage des titres de colonnes du tableau
     echo '<table><tr>';
+    echo '<th class="invisible"></th>';
     foreach ($commandes[0] as $cle => $valeur) {
       echo '<th>' . $cle . '</th>';
     }
@@ -18,6 +19,7 @@ ob_start();
     // Affichage des lignes du tableau
     foreach ($commandes as $ligne) {
       echo '<tr>';
+      echo'<td><a class="action" href="index.php?action=commande&idComm='.$ligne['N° commande'].'">Afficher</a></td>';
       // Affichage des valeurs d'une ligne
       foreach ($ligne as $valeur) {
         echo '<td>' . $valeur . '</td>';
