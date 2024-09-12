@@ -66,7 +66,7 @@ function getIdClientCommande($idComm)
 function getClient($idClient)
 {
     $bdd = connexionBDD();
-    $reponse = $bdd->query("SELECT nom, prenom, adresse, ville FROM client INNER JOIN commande ON commande.id_client = client.id_client WHERE client.id_client = $idClient;");
+    $reponse = $bdd->query("SELECT nom, prenom, adresse, ville FROM client WHERE client.id_client = $idClient;");
     $client = $reponse->fetchAll(PDO::FETCH_ASSOC);
     return $client;
 }
