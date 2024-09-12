@@ -1,15 +1,16 @@
 <?php
-$title = TITREONGLET ." - Détail commande n°$idComm";
+$title = TITREONGLET . " - Détail commande n°$idComm";
 $header = NOMSITE;
 $titre = "Commande n°$idComm";
 $menu = MENU;
 ob_start();
 ?>
-<div class="titreCommande">Client :</div>
-<?=var_dump($client)?>
-<div class="titreCommande">Articles :</div>
-<?php
-if (count($article)) {
+<div class='resultat'>
+  <div class="titreCommande">Client :</div>
+  <?= $client[0]['nom'] . " " . $client[0]['prenom'] ?>
+  <div class="titreCommande">Articles :</div>
+  <?php
+  if (count($article)) {
     // Affichage des titres de colonnes du tableau
     echo '<table><tr>';
     foreach ($article[0] as $cle => $valeur) {
@@ -30,7 +31,8 @@ if (count($article)) {
   } else
     echo "<div class='reponse'>Aucun client n'est enregistré dans la liste</div>";
   ?>
-<div class="titreCommande">Total : <?=$total?> €</div>
+  <div class="titreCommande">Total : <?= $total ?> €</div>
+</div>
 <?php
 $contenu = ob_get_clean();
 $footer = "&copy; MMI Mulhouse";
