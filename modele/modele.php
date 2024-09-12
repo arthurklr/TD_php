@@ -43,8 +43,8 @@ function getArticlesCommande($idComm)
 {
     $bdd = connexionBDD();
     $reponse = $bdd->query("SELECT quantite AS 'Quantité', article.designation AS 'Désignation', article.categorie AS 'Catégorie', article.prix AS 'Prix' FROM ligne INNER JOIN article ON article.id_article = ligne.id_article WHERE ligne.id_comm = $idComm;");
-    $article = $reponse->fetchAll(PDO::FETCH_ASSOC);
-    return $article;
+    $articles = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    return $articles;
 }
 
 function getTotalCommande($idComm)
