@@ -23,7 +23,7 @@ function commandes()
     require "vue/vueCommandes.php";
 }
 
-function commande()
+function commande($idComm)
 {
     $idComm = $_GET['idComm'];
     $idClient = getIdClientCommande($idComm);
