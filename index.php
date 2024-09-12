@@ -12,11 +12,12 @@ try {
             articles();
         else if ($_GET["action"] == "commandes")
             commandes();
+        else if ($_GET["action"] == "commande" && ($_GET['idComm']) >0 && $_GET['idComm'] <= 13 )
+            commande();
         else
             throw new Exception("Action non valide");
     } else
         accueil();
-
 } catch (Exception $e) {
     erreur($e->getMessage());
 }
