@@ -12,9 +12,13 @@ try {
             articles();
         else if ($_GET["action"] == "commandes")
             commandes();
-        else if ($_GET["action"] == "commande" && ($_GET['idComm']) >0 && $_GET['idComm'] <= 13 )
-            commande();
-        else
+        else if ($_GET["action"] == "commande") {
+            if (($_GET['idComm']) > 0 && $_GET['idComm'] <= count(getCommandes()))
+                commande(idComm: $_GET['idComm']);
+            else {
+                throw new Exception("Numéro de commande non valide");
+            }
+        } else
             throw new Exception("Action non valide");
     } else
         accueil();
