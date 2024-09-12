@@ -38,3 +38,38 @@ function getCommandes()
     $commandes = $reponse->fetchAll(PDO::FETCH_ASSOC);
     return $commandes;
 }
+
+function getArticlesCommande($idComm)
+{
+    $bdd = connexionBDD();
+    $reponse = $bdd->query("SELECT quantite AS 'Quantité', article.designation AS 'Désignation', article.categorie AS 'Catégorie', article.prix AS 'Prix' FROM ligne INNER JOIN article ON article.id_article = ligne.id_article WHERE ligne.id_comm = $idComm;");
+    $article = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    return $article;
+}
+
+function getTotalCommande($idComm)
+{
+    $bdd = connexionBDD();
+    $reponse = $bdd->query("SELECT SUM(ligne.quantite * article.prix) AS Total FROM ligne INNER JOIN article ON ligne.id_article = article.id_article WHERE ligne.id_comm = $idComm;");
+    $total = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    return $total[0]["Total"];
+}
+
+function getIdClientCommande($idComm)
+{
+    $bdd = connexionBDD();
+    $reponse = $bdd->query("SELECT id_client FROM commande WHERE id_comm = $idComm");
+    $idClient = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    return $idClient[0]['id_client'];
+}
+
+function getClient($idClient)
+{
+    $bdd = connexionBDD();
+    $reponse = $bdd->query("SELECT nom, prenom, adresse, ville FROM client INNER JOIN commande ON commande.id_client = client.id_client WHERE client.id_client = $idClient;");
+    $client = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    return $client;
+}
+
+
+
