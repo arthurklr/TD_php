@@ -25,9 +25,8 @@ function commandes()
 
 function commande($idComm)
 {
-    $idComm = $_GET['idComm'];
     $idClient = getIdClientCommande($idComm);
-    $article = getArticlesCommande($idComm);
+    $articles = getArticlesCommande($idComm);
     $client = getClient($idClient);
     $total = getTotalCommande($idComm);
     require "vue/vueCommande.php";
