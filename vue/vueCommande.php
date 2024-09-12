@@ -1,12 +1,12 @@
 <?php
-$title = TITREONGLET;
+$title = TITREONGLET ." - Détail commande n°$idComm";
 $header = NOMSITE;
 $titre = "Commande n°$idComm";
 $menu = MENU;
 ob_start();
 ?>
 <div class="titreCommande">Client :</div>
-<?=$client[0]['nom']?>
+<?=var_dump($client)?>
 <div class="titreCommande">Articles :</div>
 <?php
 if (count($article)) {

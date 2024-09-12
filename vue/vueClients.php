@@ -1,5 +1,5 @@
 <?php
-$title = TITREONGLET;
+$title = TITREONGLET . " - Liste des clients";
 $header = NOMSITE;
 $titre = "Liste des clients";
 $menu = MENU;
