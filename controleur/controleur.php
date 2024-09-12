@@ -23,6 +23,16 @@ function commandes()
     require "vue/vueCommandes.php";
 }
 
+function commande()
+{
+    $idComm = $_GET['idComm'];
+    $idClient = getIdClientCommande($idComm);
+    $article = getArticlesCommande($idComm);
+    $client = getClient($idClient);
+    $total = getTotalCommande($idComm);
+    require "vue/vueCommande.php";
+}
+
 function erreur($message)
 {
     require "vue/vueErreur.php";
