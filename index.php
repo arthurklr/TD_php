@@ -13,9 +13,10 @@ try {
         else if ($_GET["action"] == "commandes")
             commandes();
         else if ($_GET["action"] == "commande") {
-            if (($_GET['idComm']) > 0 && $_GET['idComm'] <= count(getCommandes()))
-                commande(idComm: $_GET['idComm']);
-            else {
+            if (isset($_GET['idComm'])) {
+                $idComm = $_GET["idComm"];
+                commande($_GET['idComm']);
+            } else {
                 throw new Exception("Numéro de commande non valide");
             }
         } else
