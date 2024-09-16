@@ -25,11 +25,14 @@ function commandes()
 
 function commande($idComm)
 {
-    $idClient = getIdClientCommande($idComm);
     $articles = getArticlesCommande($idComm);
-    $client = getClient($idClient);
+    if(!empty($articles)) {
+    $client = getClient(getIdClientCommande($idComm));
     $total = getTotalCommande($idComm);
     require "vue/vueCommande.php";
+    } else {
+        throw new Exception("Echec de l'affichage de la commande n°$idComm");
+    }
 }
 
 function erreur($message)
