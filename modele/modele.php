@@ -42,15 +42,18 @@ function getCommandes()
 function getArticlesCommande($idComm)
 {
     $bdd = connexionBDD();
-    $reponse = $bdd->query("SELECT quantite AS 'Quantité', article.designation AS 'Désignation', article.categorie AS 'Catégorie', article.prix AS 'Prix' FROM ligne INNER JOIN article ON article.id_article = ligne.id_article WHERE ligne.id_comm = $idComm;");
+    $reponse = $bdd->prepare("SELECT quantite AS 'Quantité', article.designation AS 'Désignation', article.categorie AS 'Catégorie', article.prix AS 'Prix' FROM ligne INNER JOIN article ON article.id_article = ligne.id_article WHERE ligne.id_comm = ?;");
+    $reponse->execute(array($idComm));
     $articles = $reponse->fetchAll(PDO::FETCH_ASSOC);
     return $articles;
 }
 
+
 function getTotalCommande($idComm)
 {
     $bdd = connexionBDD();
-    $reponse = $bdd->query("SELECT SUM(ligne.quantite * article.prix) AS Total FROM ligne INNER JOIN article ON ligne.id_article = article.id_article WHERE ligne.id_comm = $idComm;");
+    $reponse = $bdd->prepare("SELECT SUM(ligne.quantite * article.prix) AS Total FROM ligne INNER JOIN article ON ligne.id_article = article.id_article WHERE ligne.id_comm = ?;");
+    $reponse->execute(array($idComm));
     $total = $reponse->fetchAll(PDO::FETCH_ASSOC);
     return $total[0]["Total"];
 }
@@ -58,18 +61,28 @@ function getTotalCommande($idComm)
 function getIdClientCommande($idComm)
 {
     $bdd = connexionBDD();
-    $reponse = $bdd->query("SELECT id_client FROM commande WHERE id_comm = $idComm");
+    $reponse = $bdd->prepare("SELECT id_client FROM commande WHERE id_comm = ?");
+    $reponse->execute(array($idComm));
     $idClient = $reponse->fetchAll(PDO::FETCH_ASSOC);
-    return $idClient[0]['id_client'];
+
+    if (isset($idClient[0]["id_client"]))
+        return $idClient[0]['id_client'];
+    else
+        return FALSE;
+
+    //OPERATEUR TERNAIRE
+    //return isset($idClient[0]['id_client']) ? $idClient[0]['id_client'] : FALSE;
 }
 
+// Retourne les informations d'un client
 function getClient($idClient)
 {
     $bdd = connexionBDD();
-    $reponse = $bdd->query("SELECT nom, prenom, adresse, ville FROM client WHERE client.id_client = $idClient;");
-    $client = $reponse->fetchAll(PDO::FETCH_ASSOC);
-    return $client;
+    $reponse = $bdd->prepare('SELECT nom, prenom, adresse, ville FROM client WHERE id_client=?');
+    $reponse->execute(array($idClient));
+    if ($reponse->rowCount() == 1)
+        return $reponse->fetch(PDO::FETCH_ASSOC);
+    else
+        throw new Exception("Aucun client ne correspond à l'identifiant $idClient");
 }
-
-
 

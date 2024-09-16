@@ -7,11 +7,11 @@ ob_start();
 ?>
 <div class='resultat'>
   <div class="titreCommande">Client :</div>
-  <?= $client[0]['nom'] . " " . $client[0]['prenom'] ?>
+  <?= $client['nom'] . " " . $client['prenom'] ?>
   <br>
-  <?= $client[0]['adresse'] ?>
+  <?= $client['adresse'] ?>
   <br>
-  <?= $client[0]['ville'] ?>
+  <?= $client['ville'] ?>
   <div class="titreCommande">Articles :</div>
   <?php
   // Affichage des titres de colonnes du tableau
